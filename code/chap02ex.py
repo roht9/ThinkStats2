@@ -21,7 +21,15 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+
+    max_key = None
+    max_value = -1
+    for k, v in thinkstats2.Hist.Items(hist) :
+        if v > max_value :
+            max_key = k
+            max_value = v
+        
+    return max_key
 
 
 def AllModes(hist):
@@ -31,7 +39,16 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+    list = []
+
+    for k in  sorted(hist.Values(), reverse=True) :
+        print("key")
+        print(k)
+        print("val")
+        print(thinkstats2.Hist.Freq(hist,k))
+        list.append([k, thinkstats2.Hist.Freq(hist, k)])
+
+    return list
 
 
 def main(script):
@@ -49,6 +66,7 @@ def main(script):
 
     # test AllModes
     modes = AllModes(hist)
+    print(modes[0][1] == 4693)
     assert(modes[0][1] == 4693)
 
     for value, freq in modes[:5]:
