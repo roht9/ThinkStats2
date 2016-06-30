@@ -41,13 +41,12 @@ def AllModes(hist):
     """
     list = []
 
-    for k in  sorted(hist.Values(), reverse=True) :
-        print("key")
-        print(k)
-        print("val")
-        print(thinkstats2.Hist.Freq(hist,k))
+    for k in  sorted(hist.Values(),key=lambda v: thinkstats2.Hist.Freq(hist, v), reverse=True) :
+        # print("key")
+        # print(k)
+        # print("val")
+        # print(thinkstats2.Hist.Freq(hist,k))
         list.append([k, thinkstats2.Hist.Freq(hist, k)])
-
     return list
 
 
@@ -66,7 +65,6 @@ def main(script):
 
     # test AllModes
     modes = AllModes(hist)
-    print(modes[0][1] == 4693)
     assert(modes[0][1] == 4693)
 
     for value, freq in modes[:5]:
